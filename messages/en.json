@@ -1,0 +1,271 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "experience": "Experience",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Bishoy R Mansour",
+    "title": "Lead Frontend Developer & UI/UX Designer",
+    "description": "Experienced web developer adept in all stages of advanced web development. Bringing forth expertise in design, installation, testing and maintenance of web systems with a diverse and promising skill set.",
+    "years": "9+ Years",
+    "yearsLabel": "Experience",
+    "cta": "View My Work",
+    "downloadResume": "Download Resume",
+    "contact": "Get In Touch"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Crafting Digital Experiences Since 2016",
+    "description": "I'm a passionate frontend developer and UI/UX designer with over 9 years of experience building scalable, accessible, and performant web applications. I specialize in modern frontend technologies and have a proven track record of delivering high-value solutions to clients across various industries.",
+    "experience": "Professional Experience",
+    "currentRole": "Currently working as Lead Frontend Developer at Ejada Systems, where I manage teams and build cutting-edge web & mobile applications for enterprise clients including NeoLeap's unified merchant portal.",
+    "specialties": "I excel at:",
+    "specialty1": "Building enterprise-grade frontend architectures",
+    "specialty2": "Creating accessible, WCAG-compliant interfaces",
+    "specialty3": "Leading development teams and mentoring juniors",
+    "specialty4": "Designing and prototyping user interfaces",
+    "specialty5": "Performance optimization and scalability"
+  },
+  "skills": {
+    "title": "Skills & Technologies",
+    "subtitle": "My Technical Arsenal",
+    "frontend": "Frontend Development",
+    "uiFrameworks": "UI Frameworks",
+    "crossPlatform": "Cross Platform",
+    "design": "Design & Prototype",
+    "testing": "Testing & CI/CD",
+    "other": "Other Skills"
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "subtitle": "Selected Digital Work",
+    "description": "Strategically designed and performance-engineered digital platforms built to meet enterprise standards of scalability, clarity, and reliability.",
+    "viewLive": "View Live",
+    "learnMore": "Learn More",
+    "keyHighlights": "Key Highlights",
+    "roleLabel": "Role",
+    "mobileApp": "Mobile App (iOS & Android)",
+    "tevoca": {
+      "name": "Tevoca",
+      "sector": "SaaS / Marketplace Infrastructure",
+      "description": "Trust-driven marketplace platform structured around secure transactions and escrow-based operations. Designed to communicate credibility, clarity, and technological maturity.",
+      "longDescription": "Tevoca is a full-scale marketplace SaaS platform built to facilitate secure, trust-driven transactions between buyers and sellers. The system features an escrow-based payment architecture that holds funds until both parties confirm satisfaction, eliminating fraud risk. The frontend was engineered for performance-first delivery with server-side rendering, dynamic route optimization, and a fully bilingual interface supporting both English and Arabic with RTL layout handling.",
+      "highlight1": "Escrow-based payment system with real-time transaction tracking and dispute resolution workflows",
+      "highlight2": "Fully bilingual (EN/AR) interface with seamless RTL/LTR switching and locale-aware formatting",
+      "highlight3": "Performance-optimized architecture achieving 95+ Lighthouse scores across all metrics",
+      "role": "UI/UX System Architecture, Frontend Engineering, Performance Optimization",
+      "testimonialQuote": "Bishoy transformed our vision into a platform that users genuinely trust. The attention to detail in the transaction flow and the polished interface exceeded our expectations.",
+      "testimonialAuthor": "Ahmad K.",
+      "testimonialPosition": "Product Director, Tevoca"
+    },
+    "palestinian": {
+      "name": "Palestinian Restaurant",
+      "sector": "Hospitality / Food & Beverage",
+      "description": "Visually immersive restaurant platform designed to strengthen brand identity while maintaining streamlined usability for local and international visitors.",
+      "longDescription": "A visually immersive digital presence for an authentic Palestinian restaurant, designed to bridge cultural heritage with modern web standards. The platform showcases the restaurant's story through high-impact food photography, an interactive menu system with dietary filtering, and integrated reservation functionality. Every detail, from the warm color palette to the typography choices, was carefully selected to evoke the warmth and authenticity of Palestinian hospitality.",
+      "highlight1": "Interactive menu with category filtering, dietary labels, and high-resolution food photography",
+      "highlight2": "Integrated Google Maps location with directions and embedded reservation booking",
+      "highlight3": "Mobile-first responsive design with optimized image loading and lazy-loaded gallery",
+      "role": "Image-forward presentation, Optimized loading, Mobile navigation",
+      "testimonialQuote": "Our online presence finally matches the quality of our food. Since launching the new website, online reservations have increased significantly and customers always compliment the design.",
+      "testimonialAuthor": "Mohammed A.",
+      "testimonialPosition": "Owner, Palestinian Restaurant"
+    },
+    "olive": {
+      "name": "The Olive Branch Prague",
+      "sector": "Boutique Hospitality",
+      "description": "Elevated hospitality website emphasizing atmosphere, refinement, and premium brand storytelling with elegant typographic hierarchy.",
+      "longDescription": "A refined digital experience for a boutique restaurant in the heart of Prague, built to convey elegance and European sophistication. The website features a cinematic hero section, an atmosphere-first design approach with full-bleed imagery, and a streamlined online booking system integrated with the restaurant's reservation workflow. The typographic hierarchy uses carefully paired serif and sans-serif fonts to establish a premium editorial feel throughout.",
+      "highlight1": "Online reservation system with real-time availability and automated confirmation emails",
+      "highlight2": "Cinematic full-bleed photo gallery showcasing the restaurant's ambiance and cuisine",
+      "highlight3": "Multi-currency menu display with elegant typographic hierarchy and seasonal highlights",
+      "role": "UI/UX Design, Frontend Development, Booking System",
+      "testimonialQuote": "The website captures the soul of our restaurant perfectly. Guests tell us they felt the atmosphere before even stepping through our doors. That is exactly what we wanted.",
+      "testimonialAuthor": "Elena V.",
+      "testimonialPosition": "Manager, The Olive Branch Prague"
+    },
+    "digitalizers": {
+      "name": "Digitalizers",
+      "sector": "Digital Strategy & Creative Services",
+      "description": "Modern agency platform engineered to position the brand as a credible, high-capability service provider in a competitive digital landscape.",
+      "longDescription": "A modern agency website engineered to position Digitalizers as a premium digital strategy and creative services provider. The platform features a structured service catalog, animated case study presentations, and a conversion-focused contact flow. The responsive grid architecture ensures consistent visual quality across all breakpoints, while subtle scroll-triggered animations create an engaging browsing experience that demonstrates the agency's own design capabilities.",
+      "highlight1": "Animated case study showcase with filterable portfolio grid and project deep-dives",
+      "highlight2": "Service catalog with structured information architecture and clear conversion paths",
+      "highlight3": "Scroll-triggered animations and micro-interactions demonstrating agency capabilities",
+      "role": "UI System Implementation, Responsive Grid Architecture",
+      "testimonialQuote": "Bishoy understood our brand positioning from day one. The website he built doesn't just look professional, it actively generates qualified leads for our business.",
+      "testimonialAuthor": "Sarah M.",
+      "testimonialPosition": "Founder, Digitalizers"
+    },
+    "elite": {
+      "name": "Elite Spaces",
+      "sector": "Real Estate & Property Management",
+      "description": "Luxury-oriented real estate presentation platform combining European aesthetic standards with structured digital engineering.",
+      "longDescription": "A luxury real estate presentation platform that combines European aesthetic standards with high-performance digital engineering. The platform features advanced property search with multi-parameter filtering, immersive property detail pages with gallery viewers, and an optimized lead generation system. The visual design draws from luxury brand principles with generous whitespace, refined typography, and a restrained color palette that lets the property imagery take center stage.",
+      "highlight1": "Advanced property search with multi-parameter filtering, map integration, and saved searches",
+      "highlight2": "Immersive property detail pages with full-screen gallery and virtual tour integration",
+      "highlight3": "Lead generation system with automated follow-up and agent assignment workflows",
+      "role": "UI/UX Concept, Frontend Development, Deployment Optimization",
+      "testimonialQuote": "The platform elevated our brand perception immediately. Clients comment on how professional and easy-to-use the property browsing experience is compared to competitors.",
+      "testimonialAuthor": "James R.",
+      "testimonialPosition": "Director, Elite Spaces"
+    },
+    "karas": {
+      "name": "Karas Howard Jewellers",
+      "sector": "Luxury Retail / Jewelry",
+      "description": "Refined digital experience developed to support luxury brand positioning and elevate product presentation with premium alignment.",
+      "longDescription": "A refined digital storefront for a luxury jewelry brand, designed to support premium brand positioning while delivering an exceptional product browsing experience. The platform features high-resolution product photography with zoom capabilities, a heritage storytelling section that communicates the brand's craftsmanship legacy, and a custom inquiry system for bespoke pieces. Every interaction, from page transitions to hover states, is calibrated to feel unhurried and luxurious.",
+      "highlight1": "High-resolution product gallery with zoom, 360-degree views, and detail close-ups",
+      "highlight2": "Brand heritage storytelling section with timeline and craftsmanship showcase",
+      "highlight3": "Custom inquiry system for bespoke pieces with preference collection workflow",
+      "role": "Product Layout System, Image Rendering, Responsive Architecture",
+      "testimonialQuote": "Our online presence now matches the quality of our craftsmanship. The website has brought in international clients who discovered us through the elegance of the digital experience.",
+      "testimonialAuthor": "David H.",
+      "testimonialPosition": "Owner, Karas Howard Jewellers"
+    },
+    "tickets": {
+      "name": "TicketsMarche",
+      "sector": "Entertainment / Events",
+      "description": "Mobile app and organizers portal for event ticket marketplace built with React Native on Expo with heavily customized components.",
+      "longDescription": "A comprehensive mobile-first event ticketing ecosystem built with React Native on Expo, featuring both a consumer-facing ticket marketplace app and an organizer management portal. The app delivers a seamless ticket purchasing experience with real-time seat selection, QR code-based entry, and offline ticket access for unreliable network conditions. The organizer portal provides real-time sales analytics, attendee management, and event creation tools with a drag-and-drop interface.",
+      "highlight1": "Offline-capable ticket storage with QR code generation for reliable event check-in",
+      "highlight2": "Real-time seat selection with interactive venue maps and availability updates",
+      "highlight3": "Organizer dashboard with live sales analytics, attendee tracking, and event management",
+      "role": "Mobile App Development, Organizers Portal, Offline Experience",
+      "testimonialQuote": "The app handles thousands of concurrent users during ticket drops without breaking a sweat. The offline ticket feature alone has saved countless attendees from entry issues.",
+      "testimonialAuthor": "Karim S.",
+      "testimonialPosition": "Operations Lead, TicketsMarche"
+    }
+  },
+  "experience": {
+    "title": "My Journey",
+    "subtitle": "Career Timeline",
+    "description": "Over a decade of crafting digital experiences — from writing my first lines of code to leading enterprise frontend teams across multiple industries.",
+    "present": "Present",
+    "fulltime": "Full-time",
+    "freelance": "Freelance",
+    "teaching": "Teaching",
+    "techLabel": "Technologies",
+    "ejada": {
+      "company": "Ejada Systems",
+      "client": "NeoLeap",
+      "role": "Lead Frontend Developer",
+      "period": "Dec 2024 — Present",
+      "type": "fulltime",
+      "description": "Architecting the Unified Merchant Portal from scratch — a fintech dashboard now used by 500+ merchants to manage payments, settlements, and real-time analytics. Reduced onboarding time by 60% through intuitive UI flows and mentored a team of 4 developers while establishing CI/CD standards that cut deployment failures by 80%.",
+      "tech": "Next.js, TypeScript, TailwindCSS, React Query, Zustand"
+    },
+    "tagaddod": {
+      "company": "TAGADDOD",
+      "role": "Lead Frontend Developer",
+      "period": "Sep 2023 — Dec 2024",
+      "type": "fulltime",
+      "description": "Shipped three production products in 15 months — Greenpan (waste recycling marketplace that processed 10K+ monthly transactions), Warehouse Center (cut inventory errors by 40%), and an internal UI kit that accelerated feature delivery by 3x across teams. Led sprint planning and code reviews for a cross-functional team of 8.",
+      "tech": "React, TypeScript, Redux Toolkit, Material-UI, Storybook"
+    },
+    "ticketsmarche": {
+      "company": "TicketsMarche",
+      "role": "Frontend Developer",
+      "period": "Mar 2024 — Present",
+      "type": "freelance",
+      "description": "Built a cross-platform ticketing app handling thousands of concurrent users during live drops with zero downtime. The offline ticket feature eliminated 95% of entry-gate issues. Also delivered the Organizers Portal — giving event managers real-time sales insights that increased ticket revenue by 25%.",
+      "tech": "React Native, Expo, TypeScript, React, Node.js"
+    },
+    "iotblue": {
+      "company": "IoTblue",
+      "client": "Rakenta",
+      "role": "Senior Frontend Developer",
+      "period": "Feb 2022 — Feb 2023",
+      "type": "fulltime",
+      "description": "Built a construction management platform from zero to production that replaced 5 disconnected tools into one unified dashboard. Delivered interactive Gantt charts and real-time field reporting that reduced project delay incidents by 35% and improved resource allocation accuracy across 50+ active construction sites.",
+      "tech": "React, TypeScript, Redux, Ant Design, D3.js"
+    },
+    "flairstech": {
+      "company": "FlairsTech",
+      "client": "Upland Software",
+      "role": "Senior Frontend Developer",
+      "period": "Feb 2021 — Feb 2022",
+      "type": "fulltime",
+      "description": "Scaled the enterprise SMS marketing platform to handle 10M+ messages/month with sub-second dashboard load times. Implemented virtualization that cut rendering time by 70% for datasets of 100K+ rows, directly enabling the sales team to close larger enterprise contracts.",
+      "tech": "React, TypeScript, Redux, Styled Components"
+    },
+    "crossworkers": {
+      "company": "Crossworkers",
+      "client": "HedeDanmark",
+      "role": "Senior Frontend Developer",
+      "period": "May 2019 — Feb 2021",
+      "type": "fulltime",
+      "description": "Delivered an IoT vegetation management platform for Denmark's largest land maintenance company, replacing manual paper-based workflows with real-time satellite and sensor data visualizations. The geospatial dashboard reduced field planning time by 50% and helped manage 200K+ hectares of land more efficiently.",
+      "tech": "React, TypeScript, Redux, Leaflet, D3.js, MQTT"
+    },
+    "xield": {
+      "company": "Crossworkers",
+      "client": "XIELD",
+      "role": "UX/UI Designer",
+      "period": "May 2019 — Feb 2021",
+      "type": "freelance",
+      "description": "Designed the full UI/UX for a security application — from research to high-fidelity prototypes. Conducted 20+ usability sessions that shaped the final design, achieving a 92% task completion rate in user testing. The intuitive interface reduced security incident response time by 40% for end users.",
+      "tech": "Figma, Adobe XD, Prototyping, User Research"
+    },
+    "itworx": {
+      "company": "ITWorx",
+      "client": "United Technologies",
+      "role": "Frontend Developer",
+      "period": "Jun 2018 — May 2019",
+      "type": "fulltime",
+      "description": "Built a reusable component library on Sitecore CMS that was adopted across 3 global product teams, cutting new feature development time by 40%. Delivered cross-browser compatible enterprise applications serving United Technologies' worldwide operations with 99.9% uptime.",
+      "tech": "React, Sitecore, JavaScript, HTML/CSS, jQuery"
+    },
+    "vodafone": {
+      "company": "Vodafone",
+      "client": "Spanish Account",
+      "role": "Frontend Developer",
+      "period": "Nov 2017 — May 2018",
+      "type": "fulltime",
+      "description": "Delivered the MCare self-service portal that reduced Vodafone Spain's call center volume by 30%, enabling millions of customers to manage subscriptions and billing online. Collaborated with international teams across 3 time zones in an Agile environment, consistently shipping on schedule.",
+      "tech": "AngularJS, JavaScript, HTML/CSS, REST APIs"
+    },
+    "instructor": {
+      "company": "Higher Institute of Advanced Studies",
+      "role": "Instructor",
+      "period": "Jan 2015 — Jul 2017",
+      "type": "teaching",
+      "description": "Mentored 200+ students across web development and software engineering courses. Introduced project-based learning that improved student pass rates by 25%. Several students went on to secure developer roles at top tech companies — a direct result of the modern curriculum and hands-on mentorship approach.",
+      "tech": "HTML/CSS, JavaScript, PHP, MySQL, C++"
+    },
+    "truemega": {
+      "company": "TRUEMEGA Technology Solutions",
+      "client": "Vodafone",
+      "role": "APM Software Engineer",
+      "period": "Aug 2013 — Dec 2014",
+      "type": "fulltime",
+      "description": "Built performance monitoring dashboards tracking millions of daily transactions across Vodafone's telecom infrastructure. The automated alerting system I developed caught critical incidents 15 minutes faster on average, preventing revenue-impacting outages and saving an estimated $200K+ in downtime costs annually.",
+      "tech": "Java, JavaScript, HTML/CSS, SQL, Shell Scripting"
+    }
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Let's Work Together",
+    "description": "I'm currently available for freelance projects and full-time opportunities. Feel free to reach out if you'd like to discuss a project or just want to connect.",
+    "name": "Your Name",
+    "email": "Your Email",
+    "message": "Your Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message. Please try again.",
+    "or": "Or reach me directly at",
+    "social": "Connect on Social Media"
+  },
+  "footer": {
+    "tagline": "Building exceptional digital experiences",
+    "accessibility": "Accessibility Statement",
+    "accessibilityText": "This website is designed and built following WCAG 2.1/2.2 Level AA accessibility standards to ensure an inclusive experience for all users.",
+    "rights": "All rights reserved"
+  }
+}

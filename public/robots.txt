@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://beshoyrmansour.com
+
+# Sitemaps
+Sitemap: https://beshoyrmansour.com/sitemap.xml
