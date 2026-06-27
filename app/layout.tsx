@@ -1,9 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Urbanist, IBM_Plex_Sans_Arabic } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 import { StructuredData } from "@/components/structured-data";
+import { IntlProvider } from "@/components/intl-provider";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -98,21 +97,17 @@ export const metadata: Metadata = {
   category: "technology",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Get the locale from next-intl
-  const locale = await getLocale();
-
-  // Get messages for the locale
-  const messages = await getMessages();
-
+  // Static render defaults to English/LTR; the client provider applies an
+  // Arabic preference (and dir="rtl") after mount, keeping this page static.
   return (
     <html
-      lang={locale}
-      dir={locale === "ar" ? "rtl" : "ltr"}
+      lang="en"
+      dir="ltr"
       className="dark"
       style={{ colorScheme: "dark" }}
       suppressHydrationWarning
@@ -121,12 +116,12 @@ export default async function RootLayout({
         className={`${urbanist.variable} ${ibmPlexArabic.variable} antialiased w-full`}
       >
         <StructuredData />
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <IntlProvider>
           <a href="#main-content" className="skip-to-main">
             Skip to main content
           </a>
           {children}
-        </NextIntlClientProvider>
+        </IntlProvider>
       </body>
     </html>
   );

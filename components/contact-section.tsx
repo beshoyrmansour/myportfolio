@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Mail, Github, Linkedin, Briefcase, Rocket, GraduationCap, Hand } from "lucide-react";
+import { Mail, Phone, Github, Linkedin, Briefcase, Rocket, GraduationCap, Hand } from "lucide-react";
 
 const schema = z.object({
   name: z.string().min(2),
@@ -254,6 +254,19 @@ export function ContactSection() {
                 <Mail className="w-[18px] h-[18px]" aria-hidden="true" />
               </span>
               beshoy.r.mansour@gmail.com
+            </a>
+            <a
+              href="tel:+20109236651"
+              dir="ltr"
+              className="flex items-center gap-3 no-underline text-[#7dd3fc] text-[14.5px] font-medium mt-3"
+            >
+              <span
+                className="grid place-items-center w-[38px] h-[38px] rounded-[11px] shrink-0"
+                style={{ background: "rgba(6,182,212,0.16)" }}
+              >
+                <Phone className="w-[18px] h-[18px]" aria-hidden="true" />
+              </span>
+              +20 109 236 651
             </a>
           </div>
 

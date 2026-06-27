@@ -1,11 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-
-interface SiteEffectsProps {
-  /** Localized rotating roles for the hero typed-text effect. */
-  roles: string[];
-}
+import { useTranslations } from "next-intl";
 
 /**
  * Global progressive-enhancement layer ported from the imported design:
@@ -14,7 +10,10 @@ interface SiteEffectsProps {
  *
  * All content is visible without JS; this only enhances it.
  */
-export function SiteEffects({ roles }: SiteEffectsProps) {
+export function SiteEffects() {
+  const t = useTranslations("hero");
+  const roles = (t.raw("roles") as string[]) ?? [];
+
   useEffect(() => {
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",

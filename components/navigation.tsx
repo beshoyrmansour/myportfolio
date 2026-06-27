@@ -1,16 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Menu, X, Globe } from "lucide-react";
+import { useLocaleSwitcher } from "@/components/intl-provider";
 
 const SECTIONS = ["home", "about", "experience", "skills", "projects"] as const;
 
 export function Navigation() {
   const t = useTranslations("nav");
-  const locale = useLocale();
-  const router = useRouter();
+  const { locale, setLocale } = useLocaleSwitcher();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string>("home");
@@ -76,11 +75,7 @@ export function Navigation() {
     }
   };
 
-  const switchLang = () => {
-    const next = locale === "en" ? "ar" : "en";
-    document.cookie = `NEXT_LOCALE=${next}; path=/; max-age=31536000`;
-    router.refresh();
-  };
+  const switchLang = () => setLocale(locale === "en" ? "ar" : "en");
 
   const links = SECTIONS.map((id) => ({ id, label: t(id) }));
 
