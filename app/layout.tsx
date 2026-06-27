@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Urbanist, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
@@ -13,16 +13,20 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const inter = Inter({
-  variable: "--font-inter",
+// English typeface (body + display).
+const urbanist = Urbanist({
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700", "800"],
   subsets: ["latin"],
   display: "swap",
 });
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  weight: ["400", "500", "600", "700", "800"],
-  subsets: ["latin"],
+// Arabic typeface — applied when the active locale is Arabic (Urbanist has no
+// Arabic glyphs).
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
+  variable: "--font-arabic",
+  weight: ["400", "500", "600", "700"],
+  subsets: ["arabic"],
   display: "swap",
 });
 
@@ -114,7 +118,7 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className={`${inter.variable} ${poppins.variable} antialiased w-full`}
+        className={`${urbanist.variable} ${ibmPlexArabic.variable} antialiased w-full`}
       >
         <StructuredData />
         <NextIntlClientProvider locale={locale} messages={messages}>

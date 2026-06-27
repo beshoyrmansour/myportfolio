@@ -290,7 +290,36 @@
     "reachMe": "Reach me directly",
     "social": "Connect on Social",
     "availableTitle": "Currently available for work",
-    "availableText": "Open to freelance projects and full-time opportunities. Let's build something exceptional."
+    "availableText": "Open to freelance projects and full-time opportunities. Let's build something exceptional.",
+    "intro": "What brings you here?",
+    "budgetOptions": ["< $2k", "$2k – $5k", "$5k – $10k", "$10k+", "Not sure yet"],
+    "types": {
+      "recruiter": {
+        "label": "Recruiter",
+        "field": "Company",
+        "fieldPlaceholder": "Acme Inc.",
+        "messagePlaceholder": "Tell me about the role, team, and tech stack…",
+        "success": "Thanks! I'll review the opportunity and get back to you shortly."
+      },
+      "freelance": {
+        "label": "Need a freelancer",
+        "field": "Budget range",
+        "messagePlaceholder": "Describe your project, goals, and timeline…",
+        "success": "Thanks! I'll review your project and reply with next steps."
+      },
+      "mentor": {
+        "label": "Need a mentor",
+        "field": "Topic",
+        "fieldPlaceholder": "React architecture, career growth…",
+        "messagePlaceholder": "What would you like guidance on?…",
+        "success": "Thanks! I'll get back to you about mentorship."
+      },
+      "other": {
+        "label": "Just connecting",
+        "messagePlaceholder": "What's on your mind?…",
+        "success": "Thanks for reaching out — I'll get back to you shortly."
+      }
+    }
   },
   "footer": {
     "tagline": "Building exceptional digital experiences",

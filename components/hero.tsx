@@ -80,12 +80,12 @@ export function Hero() {
 
           <div
             data-reveal="300"
-            className="flex flex-wrap gap-3.5 justify-center min-[880px]:justify-start"
+            className="flex flex-col min-[880px]:flex-row min-[880px]:flex-wrap gap-3.5 justify-center min-[880px]:justify-start"
           >
             <a
               href="#projects"
               data-magnetic="0.4"
-              className="magnetic-btn no-underline inline-flex items-center gap-2.5 px-7 py-[15px] rounded-[14px] text-white font-semibold text-[15.5px]"
+              className="magnetic-btn no-underline inline-flex items-center justify-center gap-2.5 px-7 py-[15px] rounded-[14px] text-white font-semibold text-[15.5px] w-full min-[880px]:w-auto"
               style={{
                 background:
                   "linear-gradient(135deg,#8B5CF6,#3B82F6,#06B6D4)",
@@ -101,7 +101,7 @@ export function Hero() {
               rel="noopener noreferrer"
               download
               data-magnetic="0.3"
-              className="magnetic-btn no-underline inline-flex items-center gap-2.5 px-7 py-[15px] rounded-[14px] text-[#e9e9f2] font-semibold text-[15.5px]"
+              className="magnetic-btn no-underline inline-flex items-center justify-center gap-2.5 px-7 py-[15px] rounded-[14px] text-[#e9e9f2] font-semibold text-[15.5px] w-full min-[880px]:w-auto"
               style={{
                 border: "1px solid rgba(255,255,255,0.14)",
                 background: "rgba(255,255,255,0.04)",

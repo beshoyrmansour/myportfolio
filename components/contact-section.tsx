@@ -5,15 +5,27 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Mail, Github, Linkedin } from "lucide-react";
+import { Mail, Github, Linkedin, Briefcase, Rocket, GraduationCap, Hand } from "lucide-react";
 
 const schema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   message: z.string().min(10),
+  company: z.string().optional(),
+  topic: z.string().optional(),
+  budget: z.string().optional(),
 });
 
 type FormData = z.infer<typeof schema>;
+
+type TypeId = "recruiter" | "freelance" | "mentor" | "other";
+
+const TYPES: { id: TypeId; Icon: typeof Briefcase }[] = [
+  { id: "recruiter", Icon: Briefcase },
+  { id: "freelance", Icon: Rocket },
+  { id: "mentor", Icon: GraduationCap },
+  { id: "other", Icon: Hand },
+];
 
 const inputStyle = {
   border: "1px solid rgba(255,255,255,0.12)",
@@ -30,6 +42,7 @@ const cardStyle = {
 export function ContactSection() {
   const t = useTranslations("contact");
   const [sent, setSent] = useState(false);
+  const [type, setType] = useState<TypeId>("freelance");
   const {
     register,
     handleSubmit,
@@ -78,10 +91,10 @@ export function ContactSection() {
                 {t("sentTitle")}
               </h3>
               <p
-                className="text-[15px]"
+                className="text-[15px] leading-relaxed"
                 style={{ color: "rgba(233,233,242,0.66)" }}
               >
-                {t("sentText")}
+                {t(`types.${type}.success`)}
               </p>
             </div>
           ) : (
@@ -90,6 +103,51 @@ export function ContactSection() {
               className="flex flex-col gap-4"
               noValidate
             >
+              {/* Inquiry type selector */}
+              <div>
+                <label
+                  className="block mb-2.5 text-[13px] font-medium"
+                  style={{ color: "rgba(233,233,242,0.7)" }}
+                >
+                  {t("intro")}
+                </label>
+                <div className="grid grid-cols-2 min-[560px]:grid-cols-4 gap-2">
+                  {TYPES.map(({ id, Icon }) => {
+                    const active = type === id;
+                    return (
+                      <button
+                        key={id}
+                        type="button"
+                        onClick={() => setType(id)}
+                        aria-pressed={active}
+                        className="flex flex-col items-center gap-1.5 px-2 py-3 rounded-[14px] text-[12.5px] font-medium transition-all duration-200 cursor-pointer"
+                        style={
+                          active
+                            ? {
+                                border: "1px solid transparent",
+                                background:
+                                  "linear-gradient(135deg,#8B5CF6,#3B82F6)",
+                                color: "#fff",
+                                boxShadow:
+                                  "0 8px 24px -10px rgba(139,92,246,0.6)",
+                              }
+                            : {
+                                border: "1px solid rgba(255,255,255,0.1)",
+                                background: "rgba(255,255,255,0.03)",
+                                color: "rgba(233,233,242,0.7)",
+                              }
+                        }
+                      >
+                        <Icon className="w-[18px] h-[18px]" aria-hidden="true" />
+                        <span className="text-center leading-tight">
+                          {t(`types.${id}.label`)}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
               <Field label={`${t("name")} *`}>
                 <input
                   {...register("name")}
@@ -108,11 +166,55 @@ export function ContactSection() {
                   style={inputStyle}
                 />
               </Field>
+
+              {/* Type-specific field */}
+              {type === "recruiter" && (
+                <Field label={t("types.recruiter.field")}>
+                  <input
+                    {...register("company")}
+                    type="text"
+                    placeholder={t("types.recruiter.fieldPlaceholder")}
+                    className="brm-input w-full px-[15px] py-[13px] rounded-xl text-white text-[15px] outline-none"
+                    style={inputStyle}
+                  />
+                </Field>
+              )}
+              {type === "mentor" && (
+                <Field label={t("types.mentor.field")}>
+                  <input
+                    {...register("topic")}
+                    type="text"
+                    placeholder={t("types.mentor.fieldPlaceholder")}
+                    className="brm-input w-full px-[15px] py-[13px] rounded-xl text-white text-[15px] outline-none"
+                    style={inputStyle}
+                  />
+                </Field>
+              )}
+              {type === "freelance" && (
+                <Field label={t("types.freelance.field")}>
+                  <select
+                    {...register("budget")}
+                    className="brm-input w-full px-[15px] py-[13px] rounded-xl text-white text-[15px] outline-none cursor-pointer appearance-none"
+                    style={inputStyle}
+                    defaultValue=""
+                  >
+                    <option value="" disabled style={{ background: "#0b0b14" }}>
+                      —
+                    </option>
+                    {(t.raw("budgetOptions") as string[]).map((o) => (
+                      <option key={o} value={o} style={{ background: "#0b0b14" }}>
+                        {o}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+              )}
+
               <Field label={`${t("message")} *`}>
                 <textarea
                   {...register("message")}
                   rows={4}
-                  placeholder={t("messagePlaceholder")}
+                  placeholder={t(`types.${type}.messagePlaceholder`)}
                   className="brm-input w-full px-[15px] py-[13px] rounded-xl text-white text-[15px] outline-none resize-y"
                   style={inputStyle}
                 />
