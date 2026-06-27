@@ -1,195 +1,228 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { ThemeToggle } from "./theme-toggle";
-import { LanguageSwitcher } from "./language-switcher";
-import { menuVariants, menuItemVariants } from "@/lib/animations";
+import { useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import { Menu, X, Globe } from "lucide-react";
+
+const SECTIONS = ["home", "about", "experience", "skills", "projects"] as const;
 
 export function Navigation() {
   const t = useTranslations("nav");
-  const [isOpen, setIsOpen] = useState(false);
+  const locale = useLocale();
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState<string>("home");
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    const ids = [...SECTIONS, "contact"];
+    // Scroll-position based: the section whose top has passed a line just below
+    // the nav is "active". Works for sections taller than the viewport (which an
+    // intersection-ratio threshold cannot reliably detect).
+    const compute = () => {
+      setScrolled(window.scrollY > 24);
+      const line = 130;
+      let current = ids[0];
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= line) current = id;
+      }
+      // Snap to the last section when scrolled to the very bottom.
+      const doc = document.documentElement;
+      if (window.innerHeight + window.scrollY >= doc.scrollHeight - 4) {
+        current = ids[ids.length - 1];
+      }
+      setActive(current);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        compute();
+        ticking = false;
+      });
+    };
+
+    compute();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-
+    document.body.style.overflow = open ? "hidden" : "";
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [open]);
 
-  const navItems = [
-    { href: "#home", label: t("home") },
-    { href: "#about", label: t("about") },
-    { href: "#experience", label: t("experience") },
-    { href: "#skills", label: t("skills") },
-    { href: "#projects", label: t("projects") },
-    { href: "#contact", label: t("contact") },
-  ];
-
-  const handleNavClick = (
+  const scrollTo = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
   ) => {
     e.preventDefault();
-    setIsOpen(false);
-
-    const element = document.querySelector(href);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+    setOpen(false);
+    const el = document.querySelector(href);
+    if (el) {
+      const top =
+        el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: "smooth" });
     }
   };
 
+  const switchLang = () => {
+    const next = locale === "en" ? "ar" : "en";
+    document.cookie = `NEXT_LOCALE=${next}; path=/; max-age=31536000`;
+    router.refresh();
+  };
+
+  const links = SECTIONS.map((id) => ({ id, label: t(id) }));
+
   return (
-    <nav
-      className={`fixed left-4 right-4 z-50 rounded-2xl transition-all duration-300 m-0 ${
-        scrolled ? "floating-nav-scrolled" : "floating-nav"
-      }`}
-      role="navigation"
-      aria-label="Main navigation"
-    >
-      <div className="container px-4 md:px-6 mx-auto">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <motion.a
-            href="#home"
-            onClick={(e) => handleNavClick(e, "#home")}
-            className="text-xl md:text-2xl font-bold tracking-tighter text-foreground hover:opacity-70 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md px-2 py-1 cursor-pointer"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            aria-label="Home - Bishoy R Mansour"
+    <>
+      <nav
+        className="brm-nav fixed top-3.5 left-3 right-3 z-[900] flex items-center gap-1.5 py-2 ps-4 pe-2.5 rounded-full transition-[background,box-shadow] duration-300 min-[880px]:left-1/2 min-[880px]:right-auto min-[880px]:-translate-x-1/2 min-[880px]:max-w-[calc(100vw-24px)]"
+        style={{
+          border: "1px solid rgba(255,255,255,0.09)",
+          background: scrolled ? "rgba(10,10,16,0.78)" : "rgba(255,255,255,0.04)",
+          boxShadow: scrolled ? "0 8px 32px rgba(0,0,0,0.4)" : "none",
+          backdropFilter: "blur(18px)",
+          WebkitBackdropFilter: "blur(18px)",
+        }}
+        aria-label="Main navigation"
+      >
+        {/* Logo */}
+        <a
+          href="#home"
+          onClick={(e) => scrollTo(e, "#home")}
+          className="flex items-center gap-2 me-2 no-underline"
+          aria-label="Home — Bishoy R Mansour"
+        >
+          <span
+            className="grid place-items-center w-[30px] h-[30px] rounded-[9px] text-white font-display font-extrabold text-[13px]"
+            style={{
+              background: "linear-gradient(135deg,#8B5CF6,#06B6D4)",
+              boxShadow: "0 4px 14px rgba(139,92,246,0.5)",
+            }}
           >
-            <span className="gradient-text">BRM</span>
-          </motion.a>
+            B
+          </span>
+          <span className="font-display font-bold text-[15px] text-white tracking-tight">
+            BRM
+          </span>
+        </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <ul className="flex items-center gap-1 lg:gap-2">
-              {navItems.map((item, index) => (
-                <motion.li
-                  key={item.href}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <a
-                    href={item.href}
-                    onClick={(e) => handleNavClick(e, item.href)}
-                    className="px-4 py-2 text-sm lg:text-base font-medium text-foreground hover:text-foreground transition-all relative after:absolute after:bottom-0 after:left-4 after:right-4 after:h-0.5 after:bg-linear-to-r after:from-purple-600 after:via-blue-600 after:to-cyan-600 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md cursor-pointer"
-                    aria-label={`Navigate to ${item.label}`}
-                  >
-                    {item.label}
-                  </a>
-                </motion.li>
-              ))}
-            </ul>
-
-            <div className="flex items-center gap-3">
-              <ThemeToggle />
-              {/* <LanguageSwitcher /> */}
-            </div>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="flex items-center gap-3 md:hidden">
-            <ThemeToggle />
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-foreground hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
-              aria-label={isOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isOpen}
-              aria-controls="mobile-menu"
-            >
-              {isOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
-          </div>
+        {/* Desktop links */}
+        <div className="hidden min-[880px]:flex items-center gap-0.5">
+          {links.map((l) => {
+            const isActive = active === l.id;
+            return (
+              <a
+                key={l.id}
+                id={`nav-${l.id}`}
+                href={`#${l.id}`}
+                onClick={(e) => scrollTo(e, `#${l.id}`)}
+                aria-current={isActive ? "true" : undefined}
+                className="relative no-underline text-[13.5px] font-medium px-3 py-2 rounded-full transition-colors"
+                style={{ color: isActive ? "#fff" : "rgba(233,233,242,0.62)" }}
+              >
+                {l.label}
+                <span
+                  className="absolute start-3 end-3 bottom-1 h-0.5 rounded-sm origin-[left] transition-transform duration-300"
+                  style={{
+                    background: "linear-gradient(90deg,#8B5CF6,#06B6D4)",
+                    transform: isActive ? "scaleX(1)" : "scaleX(0)",
+                  }}
+                />
+              </a>
+            );
+          })}
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm md:hidden"
-              onClick={() => setIsOpen(false)}
-              aria-hidden="true"
-            />
+        {/* Actions (pushed to the right on mobile) */}
+        <div className="flex items-center gap-1.5 ms-auto min-[880px]:ms-0">
+        {/* Language switch */}
+        <button
+          onClick={switchLang}
+          className="grid place-items-center w-[38px] h-[38px] rounded-full text-white/80 hover:text-white transition-colors"
+          style={{
+            border: "1px solid rgba(255,255,255,0.1)",
+            background: "rgba(255,255,255,0.05)",
+          }}
+          aria-label={locale === "en" ? "التبديل إلى العربية" : "Switch to English"}
+          title={locale === "en" ? "العربية" : "English"}
+        >
+          <Globe className="w-[17px] h-[17px]" aria-hidden="true" />
+        </button>
 
-            {/* Menu Panel */}
-            <motion.div
-              id="mobile-menu"
-              variants={menuVariants}
-              initial="closed"
-              animate="open"
-              exit="closed"
-              className="fixed top-20 right-4 left-4 glass-card md:hidden shadow-xl"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Mobile navigation menu"
+        {/* CTA */}
+        <a
+          href="#contact"
+          onClick={(e) => scrollTo(e, "#contact")}
+          data-magnetic="0.35"
+          className="hidden min-[880px]:inline-flex magnetic-btn no-underline px-[18px] py-[9px] rounded-full text-white text-[13.5px] font-semibold whitespace-nowrap"
+          style={{
+            background: "linear-gradient(135deg,#8B5CF6,#3B82F6)",
+            boxShadow: "0 6px 20px rgba(139,92,246,0.45)",
+          }}
+        >
+          {t("cta")}
+        </a>
+
+        {/* Burger */}
+        <button
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          className="min-[880px]:hidden grid place-items-center w-[38px] h-[38px] rounded-[11px] text-white"
+          style={{
+            border: "1px solid rgba(255,255,255,0.1)",
+            background: "rgba(255,255,255,0.05)",
+          }}
+        >
+          {open ? <X className="w-[18px] h-[18px]" /> : <Menu className="w-[18px] h-[18px]" />}
+        </button>
+        </div>
+      </nav>
+
+      {/* Mobile menu */}
+      {open && (
+        <div
+          className="min-[880px]:hidden fixed top-[70px] left-3 right-3 z-[899] p-2.5 rounded-[22px] flex flex-col gap-0.5"
+          style={{
+            border: "1px solid rgba(255,255,255,0.1)",
+            background: "rgba(12,12,20,0.92)",
+            backdropFilter: "blur(22px)",
+            WebkitBackdropFilter: "blur(22px)",
+            boxShadow: "0 24px 60px rgba(0,0,0,0.5)",
+          }}
+        >
+          {links.map((l) => (
+            <a
+              key={l.id}
+              href={`#${l.id}`}
+              onClick={(e) => scrollTo(e, `#${l.id}`)}
+              className="no-underline text-[#e9e9f2] text-base font-medium px-4 py-3.5 rounded-[14px] hover:bg-white/5 transition-colors"
             >
-              <div className="flex flex-col p-6">
-                <nav>
-                  <ul className="space-y-2">
-                    {navItems.map((item) => (
-                      <motion.li key={item.href} variants={menuItemVariants}>
-                        <a
-                          href={item.href}
-                          onClick={(e) => handleNavClick(e, item.href)}
-                          className="block px-4 py-3 text-lg font-semibold text-foreground hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
-                          aria-label={`Navigate to ${item.label}`}
-                        >
-                          {item.label}
-                        </a>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </nav>
-
-                <motion.div
-                  variants={menuItemVariants}
-                  className="border-t border-gray-200 dark:border-gray-800 pt-6 mt-4"
-                >
-                  <LanguageSwitcher />
-                </motion.div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </nav>
+              {l.label}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            onClick={(e) => scrollTo(e, "#contact")}
+            className="no-underline text-center text-white text-base font-semibold px-4 py-3.5 rounded-[14px] mt-1"
+            style={{ background: "linear-gradient(135deg,#8B5CF6,#3B82F6)" }}
+          >
+            {t("cta")}
+          </a>
+        </div>
+      )}
+    </>
   );
 }
