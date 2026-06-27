@@ -10,9 +10,11 @@ const nextConfig: NextConfig = {
     root: __dirname,
   },
   images: {
-    // Prefer modern formats; AVIF first for best compression.
-    formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 31536000,
+    // Serve images directly instead of via Vercel's Image Optimization.
+    // The optimizer returns HTTP 402 once the plan's quota is exhausted, which
+    // breaks every <Image>. Source images are pre-sized, so this is a no-op
+    // visually but makes images reliable on any host/plan.
+    unoptimized: true,
   },
   // Tree-shake icon imports so only used icons ship in the bundle.
   experimental: {

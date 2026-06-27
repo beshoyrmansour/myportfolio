@@ -26,7 +26,7 @@ const PROJECTS: Project[] = [
     key: "xenon",
     live: "https://xenon.com.eg/",
     hasImg: true,
-    ext: "png",
+    ext: "jpg",
     hasTestimonial: false,
   },
   { key: "tickets", live: "", hasImg: false },
