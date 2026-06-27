@@ -2,44 +2,35 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <html lang="en">
-      <body>
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 px-4">
-          <div className="text-center">
-            <h1 className="text-9xl font-bold text-gray-200 dark:text-gray-700">
-              404
-            </h1>
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-                Page Not Found
-              </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-md">
-                Sorry, the page you are looking for doesn't exist or has been
-                moved.
-              </p>
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                  />
-                </svg>
-                Back to Home
-              </Link>
-            </div>
-          </div>
-        </div>
-      </body>
-    </html>
+    <main className="min-h-screen flex items-center justify-center px-6 text-center">
+      <div>
+        <p
+          className="gradient-text font-display font-extrabold leading-none mb-2"
+          style={{ fontSize: "clamp(90px,20vw,180px)" }}
+        >
+          404
+        </p>
+        <h1 className="font-display font-bold text-2xl md:text-3xl mb-3 text-white">
+          Page not found
+        </h1>
+        <p
+          className="mb-8 mx-auto max-w-md text-base leading-relaxed"
+          style={{ color: "rgba(233,233,242,0.62)" }}
+        >
+          Sorry, the page you&rsquo;re looking for doesn&rsquo;t exist or has
+          moved.
+        </p>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 px-7 py-3.5 rounded-[14px] text-white font-semibold no-underline"
+          style={{
+            background: "linear-gradient(135deg,#8B5CF6,#3B82F6)",
+            boxShadow: "0 14px 40px -10px rgba(139,92,246,0.6)",
+          }}
+        >
+          ← Back to Home
+        </Link>
+      </div>
+    </main>
   );
 }

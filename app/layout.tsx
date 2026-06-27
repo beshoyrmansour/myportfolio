@@ -1,25 +1,36 @@
-import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+import type { Metadata, Viewport } from "next";
+import { Urbanist, IBM_Plex_Sans_Arabic } from "next/font/google";
+import { SITE_URL, SITE_NAME } from "@/lib/site";
+import { StructuredData } from "@/components/structured-data";
+import { IntlProvider } from "@/components/intl-provider";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+export const viewport: Viewport = {
+  themeColor: "#07070b",
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
+};
+
+// English typeface (body + display).
+const urbanist = Urbanist({
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700", "800"],
   subsets: ["latin"],
   display: "swap",
 });
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  weight: ["600", "700", "800", "900"],
-  subsets: ["latin"],
+// Arabic typeface — applied when the active locale is Arabic (Urbanist has no
+// Arabic glyphs).
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
+  variable: "--font-arabic",
+  weight: ["400", "500", "600", "700"],
+  subsets: ["arabic"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://beshoyrmansour.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Bishoy R Mansour - Lead Frontend Developer & UI/UX Designer",
     template: "%s | Bishoy R Mansour",
@@ -38,60 +49,35 @@ export const metadata: Metadata = {
     "Cairo Frontend Developer",
     "Egypt Web Developer",
   ],
-  authors: [{ name: "Bishoy R Mansour", url: "https://beshoyrmansour.com" }],
-  creator: "Bishoy R Mansour",
-  publisher: "Bishoy R Mansour",
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-    other: [
-      { rel: "mask-icon", url: "/safari-pinned-tab.svg", color: "#3B82F6" },
-    ],
+  appleWebApp: {
+    capable: true,
+    title: SITE_NAME,
+    statusBarStyle: "black-translucent",
   },
   manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
     locale: "en_US",
     alternateLocale: ["ar_EG"],
-    url: "https://beshoyrmansour.com",
-    siteName: "Bishoy R Mansour Portfolio",
+    url: SITE_URL,
+    siteName: `${SITE_NAME} Portfolio`,
     title: "Bishoy R Mansour - Lead Frontend Developer & UI/UX Designer",
     description:
       "Experienced frontend developer and UI/UX designer with 9+ years of expertise. Specializing in React, Next.js, TypeScript, and building enterprise-grade web applications.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Bishoy R Mansour - Lead Frontend Developer & UI/UX Designer",
-        type: "image/png",
-      },
-      {
-        url: "/og-image-square.png",
-        width: 1200,
-        height: 1200,
-        alt: "Bishoy R Mansour Portfolio",
-        type: "image/png",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Bishoy R Mansour - Lead Frontend Developer & UI/UX Designer",
     description:
       "9+ years expertise in React, Next.js, TypeScript. Building scalable, accessible web applications.",
-    images: ["/og-image.png"],
     creator: "@beshoyrmansour",
   },
   robots: {
@@ -105,52 +91,37 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "google-site-verification-code",
-  },
   alternates: {
-    canonical: "https://beshoyrmansour.com",
-    languages: {
-      en: "https://beshoyrmansour.com",
-      ar: "https://beshoyrmansour.com/ar",
-    },
+    canonical: "/",
   },
   category: "technology",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Get the locale from next-intl
-  const locale = await getLocale();
-
-  // Get messages for the locale
-  const messages = await getMessages();
-
+  // Static render defaults to English/LTR; the client provider applies an
+  // Arabic preference (and dir="rtl") after mount, keeping this page static.
   return (
     <html
-      lang={locale}
-      dir={locale === "ar" ? "rtl" : "ltr"}
+      lang="en"
+      dir="ltr"
+      className="dark"
+      style={{ colorScheme: "dark" }}
       suppressHydrationWarning
     >
       <body
-        className={`${inter.variable} ${poppins.variable} antialiased w-full`}
+        className={`${urbanist.variable} ${ibmPlexArabic.variable} antialiased w-full`}
       >
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <a href="#main-content" className="skip-to-main">
-              Skip to main content
-            </a>
-            {children}
-          </ThemeProvider>
-        </NextIntlClientProvider>
+        <StructuredData />
+        <IntlProvider>
+          <a href="#main-content" className="skip-to-main">
+            Skip to main content
+          </a>
+          {children}
+        </IntlProvider>
       </body>
     </html>
   );
